@@ -12,12 +12,12 @@ export function init(beneficiary: string): void{
 // Public - donate
 export function donate(): i32 {
   // Get who is calling the method, and how much NEAR they attached
-  const donator: string = context.predecessor
+  const donor: string = context.predecessor
   const amount: u128 = context.attachedDeposit
 
   // Record the donation
-  const donation_number: i32 = add_donation(donator, amount)
-  logging.log(`Thank you ${donator}, donation number: ${donation_number}`)
+  const donation_number: i32 = add_donation(donor, amount)
+  logging.log(`EVENT_JSON:{"standard": "nep297", "version": "1.0.0", "event": "donation", "data": {"donor": "${donor}", "amount": "${amount}"}}"`)
 
   // Send the money to the beneficiary
   const beneficiary: string = get_beneficiary()
@@ -38,7 +38,7 @@ export function total_number_of_donation(): i32 {
 }
 
 // Public - get a range of donations
-export function get_donation_list(from: u32, until: u32): Array<Donation> {
+export function get_donation_list(from: i32, until: i32): Array<Donation> {
   let result: Array<Donation> = new Array<Donation>();
   for(let i:i32 = from; i <= until; i++ ){
     result.push(get_donation(i))

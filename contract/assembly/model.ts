@@ -1,7 +1,5 @@
 import { storage, u128, PersistentVector, context } from "near-sdk-as";
 
-export const STORAGE_COST: u128 = u128.from(100000000000000000000000)
-
 // Class and vector holding donations
 @nearBindgen
 export class Donation{
@@ -10,6 +8,9 @@ export class Donation{
     public amount: u128
   ) { }
 }
+
+// Aprox. cost (u128 + string = 16b + 64b = 80b = 800000000000000000000yN)
+export const STORAGE_COST: u128 = u128.from("1000000000000000000000")
 
 const donations = new PersistentVector<Donation>("unique-id-1")
 
