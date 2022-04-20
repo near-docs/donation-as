@@ -5,7 +5,6 @@
   "private": true,
   "scripts": {
     "build": "asb",
-    "build:debug": "asb --target debug",
     "test": "asp --nologo"
   },
   "dependencies": {
