@@ -4,7 +4,7 @@ import { storage, u128, PersistentVector, context } from "near-sdk-as";
 @nearBindgen
 export class Donation{
   constructor(
-    public account_id: string,
+    public donor: string,
     public amount: u128
   ) { }
 }
@@ -26,8 +26,8 @@ export function get_beneficiary(): string{
 }
 
 // Donations
-export function add_donation(account_id: string, amount: u128): i32 {
-  const new_donation: Donation = new Donation(account_id, amount)
+export function add_donation(donor: string, amount: u128): i32 {
+  const new_donation: Donation = new Donation(donor, amount)
   donations.push(new_donation)
   return donations.length
 }

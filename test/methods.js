@@ -20,7 +20,14 @@ donate = async function (amount, contract) {
 }
 
 get_donation_by_number = async function (donation_number, contract) {
-	return contract.get_donation_by_number({ donation_number } )
+	let donation = await contract.get_donation_by_number({ donation_number } )
+
+	// Sometimes the result is in scientific notation, parse it to full string
+	const amount = donation.amount.toLocaleString('fullwide', {useGrouping:false})
+
+	// return as a Number
+	donation.amount = Number(formatNearAmount(amount))
+	return donation
 }
 
 // Class to simplify interacting with the contract

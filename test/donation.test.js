@@ -1,4 +1,4 @@
-const { utils: {format: { formatNearAmount, parseNearAmount } }, } = nearAPI
+const { utils: { format: { formatNearAmount, parseNearAmount } }, } = nearAPI
 
 const { create_user, wallet_balance } = require('./methods')
 
@@ -13,7 +13,7 @@ describe('Donation Contract', function () {
     contract = await create_user(nearConfig.contractName)
     alice = await create_user(alice_address)
     bob = await create_user(bob_address)
-    cloud = await create_user(cloud_address)    
+    cloud = await create_user(cloud_address)
   });
 
   describe('Donate', function () {
@@ -39,12 +39,12 @@ describe('Donation Contract', function () {
     })
 
     it("Records the donations", async function () {
-      let donation_idx = await alice.donate(1)
+      let donation_idx = await alice.donate(1.2345)
       expect(donation_idx).toBe(3, "error recording donations")
 
       let donation = await alice.get_donation_by_number(donation_idx)
-      expect(donation.account_id).toBe(alice_address, "error recording sender")
-      expect(donation.amount).toBe(parseNearAmount("1"), "error recording amount")
+      expect(donation.donor).toBe(alice_address, "error recording sender")
+      expect(donation.amount).toBe(1.2345, "error recording amount")
     })
   });
 });
